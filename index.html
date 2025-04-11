@@ -48,6 +48,7 @@
   
     if (userVersion === latestVersion) {
       status.textContent = `Turite naujausią versiją! (v${userVersion}). Galite išjungti šį langą.`;
+      alert("Turite naujausią dokumento versiją!");
       window.close();
     } else {
       status.innerHTML = `
