@@ -17,18 +17,22 @@
   // Latest versions and download links
   const latestVersions = {
     "tikimybiuTeorijosKonspektas": {
+      name: "Tikimybių teorijos konspektas",
       version: "1.1",
       link: "https://bit.ly/tikimybiuTeorijosKonspektas"
     },
     "my-guide": {
+      name: "My Guide",
       version: "1.2",
       link: "https://drive.google.com/your-latest-my-guide.pdf"
     },
     "install-manual": {
+      name: "Install Manual",
       version: "2.1",
       link: "https://drive.google.com/your-latest-install-manual.pdf"
     },
     "cheatsheet": {
+      name: "Cheatsheet",
       version: "0.9",
       link: "https://drive.google.com/your-latest-cheatsheet.pdf"
     }
@@ -40,23 +44,24 @@
   const status = document.getElementById("status");
   
   if (!doc || !userVersion) {
-    status.textContent = "Missing document ID or version number.";
+    status.textContent = "Trūksta dokumento ID arba versijos numerio.";
   } else if (!latestVersions[doc]) {
     status.textContent = `Nežinomas dokumentas: ${doc}`;
   } else {
-    const { version: latestVersion, link } = latestVersions[doc];
+    const { name, version: latestVersion, link } = latestVersions[doc];
   
     if (userVersion === latestVersion) {
-      status.textContent = `Turite naujausią versiją! (v${userVersion}). Galite išjungti šį langą.`;
-      alert("Turite naujausią dokumento versiją!");
+      status.textContent = `Turite naujausią dokumento „${name}“ versiją! (v${userVersion}). Galite išjungti šį langą.`;
+      alert(`Turite naujausią dokumento „${name}“ versiją!`);
       window.close();
     } else {
       status.innerHTML = `
-        <p><strong>Yra naujesnė versija! ${doc}</strong></p>
+        <p><strong>Yra naujesnė dokumento „${name}“ versija!</strong></p>
         <p>Jūs turite: v${userVersion}<br>
         Naujausia: v${latestVersion}</p>
         <p>Nukreipiama į naujausią versiją...</p>
-      `;  
+      `;
+      alert(`Yra naujesnė dokumento „${name}“ versija! Jūs turite v${userVersion}, naujausia: v${latestVersion}. Nukreipiama į naujausią versiją...`);
       setTimeout(() => {
         window.location.href = link;
       }, 1000);
