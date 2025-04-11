@@ -6,18 +6,18 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>PDF Update Checker</title>
+  <title>Ar turite naujausią Miežio PDF?</title>
 </head>
 
 <body>
-  <h1>PDF Update Checker</h1>
+  <h1>Ar turite naujausią Miežio PDF?</h1>
   <div id="status"></div>
 
 <script>
   // Latest versions and download links
   const latestVersions = {
     "tikimybiuTeorijosKonspektas": {
-      version: "1.2",
+      version: "1.0",
       link: "https://bit.ly/tikimybiuTeorijosKonspektas"
     },
     "my-guide": {
@@ -42,24 +42,20 @@
   if (!doc || !userVersion) {
     status.textContent = "Missing document ID or version number.";
   } else if (!latestVersions[doc]) {
-    status.textContent = `Unknown document: ${doc}`;
+    status.textContent = `Nežinomas dokumentas: ${doc}`;
   } else {
     const { version: latestVersion, link } = latestVersions[doc];
   
     if (userVersion === latestVersion) {
-      status.textContent = `You're up to date! (v${userVersion})`;
-      alert(`You're up to date! (v${userVersion})`);
+      status.textContent = `Turite naujausią versiją! (v${userVersion}). Galite išjungti šį langą.`;
       window.close();
     } else {
       status.innerHTML = `
-        <p><strong>Update available for: ${doc}</strong></p>
-        <p>You have: v${userVersion}<br>
-        Latest: v${latestVersion}</p>
-        <p>Redirecting to the updated version...</p>
-      `;
-  
-      alert(`A new version is available!\n\nCurrent: v${userVersion}\nLatest: v${latestVersion}\n\nThe latest version will now be downloaded.`);
-  
+        <p><strong>Yra naujesnė versija! ${doc}</strong></p>
+        <p>Jūs turite: v${userVersion}<br>
+        Naujausia: v${latestVersion}</p>
+        <p>Nukreipiama į naujausią versiją...</p>
+      `;  
       setTimeout(() => {
         window.location.href = link;
       }, 1000);
